@@ -1,0 +1,50 @@
+version: '3'
+
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
+
+    volumes:
+      - ..:/workspace:cached
+      - bundle_cache:/bundle
+
+    ports:
+      - '3000:3000'
+
+    command: sleep infinity
+
+    environment:
+      DB_HOST: db
+      RAILS_MASTER_KEY: "${RAILS_MASTER_KEY}"
+      TZ: America/New_York
+
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0.28-oracle
+    restart: unless-stopped
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "true"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      timeout: 20s
+      retries: 10
+
+  mailgun:
+    image: marlonb/mailcrab:latest
+    logging:
+      driver: 'none'
+    ports:
+      - 1025:1025
+      - 8025:8025
+
+volumes:
+  mysql-data:
+  bundle_cache:
