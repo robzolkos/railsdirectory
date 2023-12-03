@@ -10,6 +10,8 @@
     <%= javascript_importmap_tags %>
     <%= favicon_link_tag %>
     <%= favicon_link_tag 'apple-touch-icon.png', rel: 'apple-touch-icon', type: 'image/png' %>
+    <%= turbo_refreshes_with method: :morph, scroll: :preserve  %>
+    <%= content_for :head %>
   </head>
 
   <body>
