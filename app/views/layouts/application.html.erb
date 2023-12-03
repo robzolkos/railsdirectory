@@ -14,13 +14,16 @@
     <%= content_for :head %>
   </head>
 
-  <body>
-    <nav class="">
+  <body class="text-black font-sans">
+    <nav class="flex justify-between mt-[20px] h-32">
+      <ul class="mx-auto relative">
+        <li><%= link_to "", root_path, class: "nav__logo absolute rounded-full h-28 w-28 bg-red hover:bg-black block hover:transition-all duration-300" %></li>
+      </ul>
     </nav>
 
-    <div class="layout">
+    <main class="max-w-7xl mx-auto">
       <%= yield %>
-    </div>
+    </main>
 
     <footer class="">
     </footer>

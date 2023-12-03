@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .nav__logo::after {
+    @apply absolute bg-no-repeat bg-center content-[''] bg-[length:100%_100%] h-8 w-[90px] left-[11px] top-[33px] brightness-0 invert;
+    background-image: url("/logo.svg");
+  }
+}
